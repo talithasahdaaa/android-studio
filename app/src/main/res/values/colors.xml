@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="nav_selected">#3F51B5</color>
+    <color name="nav_unselected">#808080</color>
+    <color name="text_primary">#535069</color>
+    <color name="primary">#8C0375</color>
+    <color name="red">#D30000</color>
+    <color name="hint_text">#1039A4</color>
+</resources>
