@@ -3,14 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constraintLayout"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="10dp"
+    android:layout_width="180dp"
+    android:layout_height="300dp"
+    android:layout_marginLeft="10dp"
     android:layout_marginTop="10dp"
-    android:layout_marginEnd="10dp"
+    android:layout_marginRight="10dp"
     android:layout_marginBottom="5dp"
     android:background="@drawable/edittext_background"
-    android:padding="5dp">
+    android:paddingStart="5dp"
+    android:paddingTop="5dp"
+    android:paddingEnd="5dp"
+    android:paddingBottom="5dp">
 
     <ImageView
         android:id="@+id/imageView"
@@ -19,83 +22,96 @@
         android:layout_marginTop="10dp"
         android:background="#FFFFFF"
         android:scaleType="centerCrop"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/tvNama"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
+
 
     <TextView
         android:id="@+id/tvNama"
-        android:layout_width="0dp"
+        android:layout_width="165dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="9dp"
         android:layout_marginTop="6dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginBottom="10dp"
         android:text=""
-        app:layout_constraintTop_toBottomOf="@id/imageView"
-        app:layout_constraintBottom_toTopOf="@id/tvHarga"
+        app:layout_constraintBottom_toTopOf="@+id/tvHarga"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <TextView
         android:id="@+id/tvHarga"
-        android:layout_width="0dp"
+        android:layout_width="165dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="11dp"
         android:layout_marginBottom="5dp"
         android:text=""
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/tvNama"
-        app:layout_constraintBottom_toTopOf="@id/tvStok"
+        app:layout_constraintBottom_toTopOf="@+id/tvViewProduct"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tvNama" />
+
+    <TextView
+        android:id="@+id/tvViewProduct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:text="view :"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toTopOf="@+id/tvStok"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvHarga" />
 
     <TextView
         android:id="@+id/tvStok"
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:text="Stok : 20"
-        android:textSize="12sp"
-        android:textColor="@color/text_primary"
-        app:layout_constraintTop_toBottomOf="@id/tvHarga"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/tvDilihat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="98dp"
         android:layout_marginBottom="10dp"
-        android:text="Dilihat : 0 Kali"
-        android:textColor="@color/text_primary"
-        android:textSize="10sp"
-        app:layout_constraintTop_toBottomOf="@id/tvStok"
+        android:text=""
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvViewProduct" />
+
 
     <ImageView
         android:id="@+id/imgbtnCart"
         android:layout_width="25dp"
         android:layout_height="23dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="15dp"
-        app:srcCompat="@drawable/ic_cart"
-        app:layout_constraintTop_toBottomOf="@id/tvHarga"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tvStok"
-        app:layout_constraintEnd_toStartOf="@id/imgbtnDeskripsi" />
+        app:layout_constraintEnd_toStartOf="@+id/imgbtnDeskripsi"
+        app:layout_constraintStart_toEndOf="@+id/tvStok"
+        app:layout_constraintTop_toBottomOf="@+id/tvHarga"
+        app:srcCompat="@drawable/ic_cart" />
 
     <ImageView
         android:id="@+id/imgbtnDeskripsi"
         android:layout_width="25dp"
         android:layout_height="23dp"
         android:layout_marginStart="10dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="15dp"
-        app:srcCompat="@drawable/deskripsi"
-        app:layout_constraintTop_toBottomOf="@id/tvHarga"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/imgbtnCart"
-        app:layout_constraintEnd_toEndOf="parent" />
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imgbtnCart"
+        app:layout_constraintTop_toBottomOf="@+id/tvHarga"
+        app:srcCompat="@drawable/deskripsi" />
 </androidx.constraintlayout.widget.ConstraintLayout>

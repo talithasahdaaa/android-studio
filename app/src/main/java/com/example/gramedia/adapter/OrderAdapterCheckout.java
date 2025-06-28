@@ -1,5 +1,7 @@
 package com.example.gramedia.adapter;
 
+import static com.example.gramedia.api.ServerAPI.BASE_URL_Image;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.gramedia.R;
 import com.example.gramedia.api.ServerAPI;
-import com.example.gramedia.ui.order.OrderItem;
+import com.example.gramedia.model.OrderItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +46,7 @@ public class OrderAdapterCheckout extends RecyclerView.Adapter<OrderAdapterCheck
         holder.txtProductQty.setText("Qty: " + item.getQty()); // Menggunakan getQuantity()
 
         Glide.with(context)
-                .load(new ServerAPI().BASE_URL_Image  + "product/" + item.getFoto())
+                .load(BASE_URL_Image + item.getFoto())
                 .placeholder(R.drawable.ic_launcher_background)
                 .error(R.drawable.ic_launcher_background)
                 .into(holder.imgProduct);

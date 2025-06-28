@@ -16,10 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.gramedia.R;
-import com.example.gramedia.api.Product;
 import com.example.gramedia.api.ServerAPI;
-import com.example.gramedia.ui.order.OrderFragment;
-import com.example.gramedia.ui.order.OrderItem;
+import com.example.gramedia.model.OrderItem;
 import com.google.gson.Gson;
 
 import java.util.List;
@@ -27,11 +25,13 @@ import java.util.List;
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> {
 
     private List<OrderItem> orderItemList;
-    private Context context;  // Tambahkan context ke adapter
+    private Context context;
+    private OnOrderUpdateListener onOrderUpdateListener;
 
-    public OrderAdapter(List<OrderItem> orderItemList, Context context) {
+    public OrderAdapter(List<OrderItem> orderItemList, Context context, OnOrderUpdateListener onOrderUpdateListener) {
         this.orderItemList = orderItemList;
-        this.context = context; // Menyimpan context untuk akses SharedPreferences
+        this.context = context;
+        this.onOrderUpdateListener = onOrderUpdateListener;
     }
 
     @NonNull
@@ -52,44 +52,29 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
 
         // Load image using Glide
         Glide.with(holder.itemView.getContext())
-                .load(ServerAPI.BASE_URL_Image  + "product/" +orderItem.getFoto())
+                .load(ServerAPI.BASE_URL_Image + orderItem.getFoto())
                 .into(holder.imgOrder);
 
         // Handle remove item click
         holder.btnHapus.setOnClickListener(v -> {
+            // Show confirmation dialog before removing the item
             new AlertDialog.Builder(context)
                     .setMessage("Yakin ingin menghapus pesanan?")
                     .setCancelable(false)
-                    .setPositiveButton("Yes", (dialog, id) -> {
-                        int currentPosition = holder.getAdapterPosition();
-                        if (currentPosition != RecyclerView.NO_POSITION) {
-                            removeProductFromOrder(currentPosition);
-                        }
-                    })
+                    .setPositiveButton("Yes", (dialog, id) -> removeProductFromOrder(position))
                     .setNegativeButton("No", null)
                     .show();
         });
 
         // Increase or decrease quantity
-        holder.btnPlus.setOnClickListener(v -> {
-            int currentPosition = holder.getAdapterPosition();
-            if (currentPosition != RecyclerView.NO_POSITION) {
-                updateQuantity(currentPosition, orderItemList.get(currentPosition).getQty() + 1);
-            }
-        });
-
+        holder.btnPlus.setOnClickListener(v -> updateQuantity(position, orderItem.getQty() + 1));
         holder.btnMinus.setOnClickListener(v -> {
-            int currentPosition = holder.getAdapterPosition();
-            if (currentPosition != RecyclerView.NO_POSITION) {
-                OrderItem item = orderItemList.get(currentPosition);
-                if (item.getQty() > 1) {
-                    updateQuantity(currentPosition, item.getQty() - 1);
-                } else {
-                    removeProductFromOrder(currentPosition);
-                }
+            if (orderItem.getQty() > 1) {
+                updateQuantity(position, orderItem.getQty() - 1);
+            } else if (orderItem.getQty() == 1) {
+                removeProductFromOrder(position);
             }
         });
-
     }
 
     @Override
@@ -98,30 +83,27 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     }
 
     private void removeProductFromOrder(int position) {
-        // Check if position is valid
         if (position >= 0 && position < orderItemList.size()) {
-            // Menghapus item berdasarkan posisi dari list
             orderItemList.remove(position);
 
-            // Update SharedPreferences setelah penghapusan
             SharedPreferences sharedPreferences = context.getSharedPreferences("OrderPrefs", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
 
-            // Convert the updated order list to JSON
             String updatedOrderJson = new Gson().toJson(orderItemList);
             editor.putString("order_items", updatedOrderJson);
             editor.apply();
 
-            // Notify the adapter
             notifyItemRemoved(position);
-            notifyCartTotalChanged();
 
-            // Jika tidak ada item tersisa, kita juga dapat membersihkan SharedPreferences
             if (orderItemList.isEmpty()) {
-                editor.remove("order_items").apply();  // Hapus order jika kosong
+                editor.remove("order_items").apply();
+            }
+
+            // Notify the fragment to update the total
+            if (onOrderUpdateListener != null) {
+                onOrderUpdateListener.updateTotal();
             }
         } else {
-            // Log an error or handle it in a way that makes sense for your app
             Log.e("OrderAdapter", "Invalid position: " + position);
         }
     }
@@ -130,19 +112,23 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         OrderItem orderItem = orderItemList.get(position);
         orderItem.setQty(newQty);
 
-        // Update SharedPreferences after quantity change
         SharedPreferences sharedPreferences = context.getSharedPreferences("OrderPrefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        // Convert the updated order list to JSON
         String updatedOrderJson = new Gson().toJson(orderItemList);
         editor.putString("order_items", updatedOrderJson);
         editor.apply();
 
-        // Notify the adapter
         notifyItemChanged(position);
-        notifyCartTotalChanged();
 
+        // Notify the fragment to update the total
+        if (onOrderUpdateListener != null) {
+            onOrderUpdateListener.updateTotal();
+        }
+    }
+
+    public interface OnOrderUpdateListener {
+        void updateTotal();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -158,29 +144,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             tvQty = itemView.findViewById(R.id.tvQty);
             tvOrderSubtotal = itemView.findViewById(R.id.tvOrderSubtotal);
             btnHapus = itemView.findViewById(R.id.btnHapus);
-            btnPlus = itemView.findViewById(R.id.btnPlus);  // Link to the Plus button
-            btnMinus = itemView.findViewById(R.id.btnMinus);  // Link to the Minus button
+            btnPlus = itemView.findViewById(R.id.btnPlus);
+            btnMinus = itemView.findViewById(R.id.btnMinus);
         }
     }
-
-    public interface OnCartChangedListener {
-        void onCartTotalChanged(int total);
-    }
-
-    private OnCartChangedListener cartChangedListener;
-
-    public void setOnCartChangedListener(OnCartChangedListener listener) {
-        this.cartChangedListener = listener;
-    }
-
-    public void notifyCartTotalChanged() {
-        if (cartChangedListener != null) {
-            double total = 0;
-            for (OrderItem p : orderItemList) {
-                total += p.getHargajual() * p.getQty();
-            }
-            cartChangedListener.onCartTotalChanged((int) total);
-        }
-    }
-
 }

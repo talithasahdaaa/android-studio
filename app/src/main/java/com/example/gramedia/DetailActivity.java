@@ -8,7 +8,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
-import com.example.gramedia.api.Product;
+import com.example.gramedia.model.Product;
 import com.example.gramedia.api.ServerAPI;
 
 public class DetailActivity extends AppCompatActivity {

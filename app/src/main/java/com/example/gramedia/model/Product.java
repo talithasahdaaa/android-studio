@@ -1,4 +1,4 @@
-package com.example.gramedia.api;
+package com.example.gramedia.model;
 
 import java.io.Serializable;
 
@@ -16,6 +16,7 @@ public class Product implements Serializable {
     private String deskripsi;
     private String kategori;
     private  int view_count;
+    private int viewCount;
 
     // Getters and Setters
 
@@ -27,4 +28,11 @@ public class Product implements Serializable {
     public String getFoto() { return foto; }
     public String getDeskripsi() { return deskripsi; }
     public int getView() { return view_count; }
+    public int getViewCount() {
+        return viewCount;
+    }
+
+    public void setViewCount(int viewCount) {
+        this.viewCount = viewCount;
+    }
 }
