@@ -24,7 +24,7 @@
             android:paddingBottom="24dp">
 
             <ImageView
-                android:id="@+id/imgProfile"
+                android:id="@+id/imgProfilePicture"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:src="@drawable/logo"
@@ -38,7 +38,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/txtWelcome"
+                    android:id="@+id/tvEmail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -49,7 +49,7 @@
 
                 <com.google.android.material.card.MaterialCardView
                     style="@style/Widget.MaterialComponents.CardView"
-                    android:id="@+id/editProfile"
+                    android:id="@+id/btnEditProfile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp">
@@ -88,7 +88,7 @@
             <!-- Menu Item Template -->
             <com.google.android.material.card.MaterialCardView
                 style="@style/Widget.MaterialComponents.CardView"
-                android:id="@+id/btnSetting"
+                android:id="@+id/btnChangePassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp">
@@ -103,7 +103,7 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/setting"
+                        android:src="@drawable/ic_lock"
                         android:contentDescription="Setting"
                         app:tint="?attr/colorPrimary" />
 
@@ -111,7 +111,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Setting"
+                        android:text="Ganti Password"
                         android:textColor="@color/text_primary"
                         android:textSize="16sp"
                         android:layout_marginStart="16dp" />
@@ -126,7 +126,45 @@
 
             <com.google.android.material.card.MaterialCardView
                 style="@style/Widget.MaterialComponents.CardView"
-                android:id="@+id/btnKontak"
+                android:id="@+id/btnOrderHistory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_history"
+                        android:contentDescription="Setting"
+                        app:tint="?attr/colorPrimary" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Order History"
+                        android:textColor="@color/text_primary"
+                        android:textSize="16sp"
+                        android:layout_marginStart="16dp" />
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_arrow"
+                        app:tint="@color/text_primary" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.MaterialComponents.CardView"
+                android:id="@+id/btnContactUs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp">
