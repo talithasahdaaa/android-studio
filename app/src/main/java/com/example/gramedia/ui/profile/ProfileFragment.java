@@ -67,11 +67,9 @@ public class ProfileFragment extends Fragment {
             new AlertDialog.Builder(requireContext())
                     .setTitle("Peringatan")
                     .setMessage("Anda harus login dulu untuk mengakses halaman ini.")
-                    .setCancelable(false) // Tidak bisa dismiss tanpa klik tombol
+                    .setCancelable(false)
                     .setPositiveButton("OK", (dialog, which) -> {
-                        // Arahkan ke halaman login dan hapus history activity
                         Intent intent = new Intent(requireActivity(), LoginActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         requireActivity().finish();
                     })

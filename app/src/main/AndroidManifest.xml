@@ -36,25 +36,36 @@
         </provider>
         <activity
             android:name=".OrderDetailActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Detail Pesanan"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".OrderHistoryActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Riwayat Pesanan"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".OrderConfirmationActivity"
             android:exported="false" />
         <activity
             android:name=".ChangePasswordActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Ganti Password"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".KontakActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Kontak Kami"/>
         <activity
             android:name=".EditProfileActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Edit Profil"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".CheckoutActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Checkout"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".SplashScreen"
             android:exported="true"
@@ -67,10 +78,10 @@
         </activity>
         <activity
             android:name=".auth.LoginActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".auth.RegisterActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />

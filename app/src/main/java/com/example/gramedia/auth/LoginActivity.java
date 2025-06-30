@@ -58,12 +58,6 @@ public class LoginActivity extends AppCompatActivity {
 
         // Cek apakah user sudah login
         sharedPreferences = getSharedPreferences("login_session", MODE_PRIVATE);
-        if (sharedPreferences.getBoolean("isLoggedIn", false)) {
-            // Jika sudah login, langsung buka MainActivity
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-            finish();
-            return;
-        }
 
         // Inisialisasi View
         etEmail = findViewById(R.id.etEmail);

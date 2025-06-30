@@ -98,9 +98,6 @@ public class EditProfileActivity extends AppCompatActivity {
 
         // Tombol Kembali
         tvBack.setOnClickListener(v -> {
-            Intent intent = new Intent(EditProfileActivity.this, ProfileFragment.class);
-            intent.putExtra("fragmentToLoad", "profile");
-            startActivity(intent);
             finish();
         });
 
