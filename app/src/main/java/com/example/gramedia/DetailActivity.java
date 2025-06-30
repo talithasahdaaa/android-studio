@@ -34,7 +34,7 @@ public class DetailActivity extends AppCompatActivity {
         if (product != null) {
             int savedViewCount = product.getView()+1;
             // Menampilkan data produk pada UI
-            Glide.with(this).load(ServerAPI.BASE_URL_Image + "product/" + product.getFoto()).into(imgDetail);
+            Glide.with(this).load(ServerAPI.BASE_URL_Image + product.getFoto()).into(imgDetail);
             tvNamaDetail.setText(product.getMerk());
             tvHargaDetail.setText(String.format("Rp %,.0f", product.getHargajual()));
             tvStokDetail.setText("Stok: " + product.getStok());

@@ -160,7 +160,7 @@ public class HomeFragment extends Fragment {
 
                     ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, kategoriList);
                     spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    binding.spinnerKategori.setAdapter(spinnerAdapter);
+//                    binding.spinnerKategori.setAdapter(spinnerAdapter);
 
                     // Default tampilkan semua produk
                     filterProducts("Semua");
